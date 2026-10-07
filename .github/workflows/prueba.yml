@@ -4,9 +4,15 @@ on:
   push:
 
 jobs:
- comprobar:
+  comprobar:
     runs-on: self-hosted
 
     steps:
-      - name: Hola mundo
-        run: echo Hola mundo
+      - name: Comparar token
+        run: |
+          if ($env:LOCAL_DEV_TOKEN -eq "${{ secrets.DEV_TOKEN }}") {
+            Write-Output "Coinciden"
+          } else {
+            Write-Output "No coinciden"
+            exit 1
+          }
