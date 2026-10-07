@@ -4,16 +4,9 @@ on:
   push:
 
 jobs:
-  comprobar:
+ comprobar:
     runs-on: self-hosted
 
     steps:
-      - name: Comparar token
-        shell: cmd
-        run: |
-          if "%LOCAL_DEV_TOKEN%"=="${{ secrets.DEV_TOKEN }}" (
-            echo Coinciden
-          ) else (
-            echo No coinciden
-            exit /b 1
-          )
+      - name: Hola mundo
+        run: echo Hola mundo
