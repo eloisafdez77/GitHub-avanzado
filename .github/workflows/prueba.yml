@@ -9,11 +9,11 @@ jobs:
 
     steps:
       - name: Comparar token
-        shell: pwsh
+        shell: cmd
         run: |
-          if ("${{ secrets.DEV_TOKEN }}" -eq $env:LOCAL_DEV_TOKEN) {
-            Write-Output "Coinciden"
-          } else {
-            Write-Output "No coinciden"
-            exit 1
-          }
+          if "%LOCAL_DEV_TOKEN%"=="${{ secrets.DEV_TOKEN }}" (
+            echo Coinciden
+          ) else (
+            echo No coinciden
+            exit /b 1
+          )
