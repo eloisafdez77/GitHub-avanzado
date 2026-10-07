@@ -9,11 +9,11 @@ jobs:
 
     steps:
       - name: Comparar token
-        shell: powershell
+        shell: pwsh
         run: |
           if ("${{ secrets.DEV_TOKEN }}" -eq $env:LOCAL_DEV_TOKEN) {
-            Write-Host "Coinciden"
+            Write-Output "Coinciden"
           } else {
-            Write-Host "No coinciden"
+            Write-Output "No coinciden"
             exit 1
           }
