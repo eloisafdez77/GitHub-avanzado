@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Actualizar README
+        run: |
+          echo "" >> README.md
+          echo "Añadida feature: ${{ github.head_ref }}" >> README.md
+
+  validate-dev:
+    runs-on: self-hosted
+    needs: update-readme
+
+    steps:
+      - name: Validar DEV_TOKEN
+        shell: powershell
+        run: |
+          if ("${{ secrets.DEV_TOKEN }}" -eq $env:LOCAL_DEV_TOKEN) {
+            Write-Host "Token correcto"
+          }
+          else {
+            Write-Error "Token incorrecto"
+          }
