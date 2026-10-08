@@ -1,0 +1,19 @@
+name: Comparar Token
+
+on:
+  push:
+
+jobs:
+  comprobar:
+    runs-on: self-hosted
+
+    steps:
+      - name: Comparar token
+        shell: powershell
+        run: |
+          if ("${{ secrets.DEV_TOKEN }}" -eq $env:LOCAL_DEV_TOKEN) {
+            Write-Host "Coinciden"
+          } else {
+            Write-Host "No coinciden"
+            exit 1
+          }
